@@ -28,10 +28,11 @@
                   (partition 2)
                   (map #(vector (keyword (first %)) (second %)))
                   (into {}))
-        {:keys [author license target]
+        {:keys [author license target url]
          :or {author (System/getProperty "user.name")
               license "epl"
-              target "babel"}} opts
+              target "babel"
+              url "https://github.com/"}} opts
         mkdirp (when-not (empty? target) ":mkdirp yes ")
         target (when-not (empty? target) (str target java.io.File/separator))
         group (group-name name)
@@ -41,6 +42,7 @@
                :fqname name
                :sanitized (tpl/name-to-path name)
                :author author
+               :url url
                :desc "FIXME: write description"
                :license-name (get-in licenses [license :name])
                :license-url (get-in licenses [license :url])
@@ -53,7 +55,9 @@
     (opts-info opts
                [:name "generated project dir"
                 :group "artefact group ID"
+                :url "project url"
                 :author "project author"
+                :author-url "author url"
                 :email "author email"
                 :license-name "license"
                 :desc "description"

@@ -80,7 +80,8 @@ Apart from the project name all other options are optional (indeed).
 If omitted, some values will assume the following defaults:
 
 * **author** - local user name (via `(System/getProperty "user.name")`)
-* **license** - `"epl"` (lein's default choice, currently only other choice is `asl`)
 * **desc** - `"FIXME: ..."` (project description)
+* **license** - `"epl"` (lein's default choice, currently only other choice is `asl`)
 * **target** - `"babel"` (source for generated/tangled source blocks
   from .org files)
+* **url* - `"http://github.com"` (project url)
