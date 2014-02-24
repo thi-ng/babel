@@ -62,4 +62,5 @@
     (tpl/->files opts
                  ["index.org" (render "index.org" opts)]
                  ["core.org" (render "core.org" opts)]
+                 ["test/core.org" (render "test.org" opts)]
                  ["tangle.sh" (render "tangle.sh") :executable true])))

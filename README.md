@@ -42,7 +42,38 @@ license                 : Apache Software License 2.0
 description             : Another great project
 path for gen sources    : generated/
 project root namespace  : org.foo.bar
+
+# switch into newly created project folder
+cd bar 
+
+# (re)generate actual lein project & sources
+./tangle.sh *.org test/*.org
+
+# switch into generated project (value of `target` key above)
+cd generated/
+
+# trigger cleaning, cljx processing & testing
+lein cleantest
+Rewriting src/cljx to target/classes (clj) with features #{clj} and 0 transformations.
+Rewriting src/cljx to target/classes (cljs) with features #{cljs} and 1 transformations.
+Rewriting test/cljx to target/test-classes (clj) with features #{clj} and 0 transformations.
+Rewriting test/cljx to target/test-classes (cljs) with features #{cljs} and 1 transformations.
+
+lein test org.foo.bar.test.core
+
+lein test :only org.foo.bar.test.core/epic-fail
+
+FAIL in (epic-fail) (core.clj:12)
+FIXME
+expected: (= 3 (+ 1 1))
+  actual: (not (= 3 2))
+
+Ran 1 tests containing 1 assertions.
+1 failures, 0 errors.
+Tests failed.
 ```
+
+Success!
 
 Apart from the project name all other options are optional (indeed).
 If omitted, some values will assume the following defaults:

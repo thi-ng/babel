@@ -1,0 +1,24 @@
+#+SEQ_TODO:       TODO(t) INPROGRESS(i) WAITING(w@) | DONE(d) CANCELED(c@)
+#+TAGS:           write(w) update(u) fix(f) verify(v) noexport(n)
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+* {{ns-root}}.test.core
+** Namespace declaration
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx :mkdirp yes :padline no
+  (ns {{ns-root}}.test.core
+    (:require
+     ,#+clj  [clojure.test :refer :all]
+     ,#+cljs [cemerick.cljs.test :as t])
+    ,#+cljs
+    (:require-macros
+     [cemerick.cljs.test :refer (is deftest with-test testing)]))
+#+END_SRC
+** Test constants
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx
+  (def meaning 42)
+#+END_SRC
+** Main tests
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx
+  (deftest epic-fail
+    (is (= 3 (+ 1 1)) "FIXME"))
+#+END_SRC
