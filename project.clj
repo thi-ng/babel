@@ -1,4 +1,4 @@
-(defproject thing-babel/lein-template "0.1.0-SNAPSHOT"
+(defproject thing-babel/lein-template "0.1.0"
   :description "Leiningen project template for literate Clojure projects w/ org-mode babel"
   :url "https://github.com/thi-ng/thing-babel"
   :license {:name "Apache Software License 2.0"
