@@ -1,0 +1,175 @@
+#+SEQ_TODO:       TODO(t) INPROGRESS(i) WAITING(w@) | DONE(d) CANCELED(c@)
+#+TAGS:           write(w) update(u) fix(f) verify(v) noexport(n)
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+TITLE:          {{fqname}}
+#+AUTHOR:         {{author}}
+#+EMAIL:          {{email}}
+#+LANGUAGE:       en
+#+OPTIONS:        toc:3 h:4 html-postamble:auto html-preamble:t tex:t
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE:   <!DOCTYPE html5>
+#+HTML_HEAD:      <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
+#+HTML_HEAD:      <link href="css/main.css" rel="stylesheet" type="text/css" />
+
+* About the project
+** Injected properties                                             :noexport:
+#+BEGIN_SRC clojure :exports none :noweb-ref version
+0.1.0-SNAPSHOT
+#+END_SRC
+#+BEGIN_SRC clojure :exports none :noweb-ref project-url
+{{url}}
+#+END_SRC
+#+BEGIN_SRC clojure :exports none :noweb-ref gen-source-path
+target/classes
+#+END_SRC
+#+BEGIN_SRC clojure :exports none :noweb-ref gen-test-path
+target/test-classes
+#+END_SRC
+#+BEGIN_SRC clojure :exports none :noweb yes :noweb-ref cljs-artefact-path
+target/{{name}}-<<version>>.js
+#+END_SRC
+
+** TODO Description
+  {{desc}}
+
+** License
+   This project is open source and licensed under the [[{{license-url}}][{{license-name}}]].
+
+** Dependencies
+*** Runtime
+**** [[https://github.com/clojure/clojure][Clojure]]
+#+BEGIN_SRC clojure :noweb-ref dep-clj
+[org.clojure/clojure "1.6.0-beta1"]
+#+END_SRC
+**** [[https://github.com/clojure/clojurescript][ClojureScript]]
+#+BEGIN_SRC clojure :noweb-ref dep-cljs
+[org.clojure/clojurescript "0.0-2173"]
+#+END_SRC
+*** Development
+**** [[https://github.com/cemerick/austin][Austin]]
+#+BEGIN_SRC clojure :noweb-ref dep-austin
+[com.cemerick/austin "0.1.4"]
+#+END_SRC
+**** [[https://github.com/lynaghk/cljx][Cljx]]
+#+BEGIN_SRC clojure :noweb-ref dep-cljx
+[com.keminglabs/cljx "0.3.2"]
+#+END_SRC
+**** [[https://github.com/hugoduncan/criterium][Criterium]]
+#+BEGIN_SRC clojure :noweb-ref dep-criterium
+[criterium "0.4.1"]
+#+END_SRC
+**** [[https://github.com/cemerick/clojurescript.test][clojurescript.test]]
+#+BEGIN_SRC clojure :noweb-ref dep-cljs-test
+[com.cemerick/clojurescript.test "0.2.2"]
+#+END_SRC
+**** [[https://github.com/emezeske/lein-cljsbuild][Cljsbuild]]
+#+BEGIN_SRC clojure :noweb-ref dep-cljsbuild
+[lein-cljsbuild "1.0.2"]
+#+END_SRC
+
+** Contributors
+
+   | *Name*     | *Role*                          | *Website*      |
+   |------------+---------------------------------+----------------|
+   | [[{{email}}][{{author}}]] | initiator & principal developer | {{author-url}} |
+
+** Release history
+
+   | *Version* | *Released* | *Description* | *Tagged Github URL* |
+   |-----------+------------+---------------+---------------------|
+   |     0.1.0 |            |               |                     |
+
+** Leiningen coordinates
+#+BEGIN_SRC clojure :noweb yes :noweb-ref lein-coords
+  [{{fqname}} <<version>>]
+#+END_SRC
+
+** Building this project
+
+  This project is written in a literate programming format and
+  requires [[https://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCwQFjAA&url=http%3A%2F%2Fwww.gnu.org%2Fs%2Femacs%2F&ei=3XkKU56JFOjy7Aaum4GwCw&usg=AFQjCNHZpLWr8MEYtdTPJaVmC1IVQiS02g&bvm=bv.61725948,d.ZGU][Emacs]] & [[http://orgmode.org][Org-mode]] to generate usable source code. Assuming
+  both are installed, the easiest way to generate a working project is
+  via command line:
+
+#+BEGIN_SRC bash
+  cd {{name}} # project root
+  ./tangle *.org test/*.org
+#+END_SRC
+
+  Once tangling is complete, you can =cd= into the generated project
+  directory (might be the same as project root, check output) and then
+  use =lein= as usual...
+
+** Leiningen project file                                          :noexport:
+#+BEGIN_SRC clojure :tangle {{tangle-target}}project.clj :noweb yes {{tangle-mkdirp}}:padline no
+  (defproject {{fqname}} "<<version>>"
+    :description "{{desc}}"
+    :url "<<project-url>>"
+    :license {:name "{{license-name}}"
+              :url "{{license-url}}"}
+    :dependencies [<<dep-clj>>]
+
+    :source-paths ["src/cljx"]
+    :test-paths ["<<gen-test-path>>"]
+  
+    :profiles {:dev {:dependencies [<<dep-cljs>>
+                                    <<dep-criterium>>]
+                     :plugins [<<dep-cljx>>
+                               <<dep-cljsbuild>>
+                               <<dep-cljs-test>>
+                               <<dep-austin>>]
+                     :aliases {"cleantest" ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]}}}
+  
+    :cljx {:builds [{:source-paths ["src/cljx"]
+                     :output-path "<<gen-source-path>>"
+                     :rules :clj}
+                    {:source-paths ["src/cljx"]
+                     :output-path "<<gen-source-path>>"
+                     :rules :cljs}
+                    {:source-paths ["test/cljx"]
+                     :output-path "<<gen-test-path>>"
+                     :rules :clj}
+                    {:source-paths ["test/cljx"]
+                     :output-path "<<gen-test-path>>"
+                     :rules :cljs}]}
+  
+    :cljsbuild {:builds [{:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
+                          :id "simple"
+                          :compiler {:output-to "<<cljs-artefact-path>>"
+                                     :optimizations :whitespace
+                                     :pretty-print true}}]
+                :test-commands {"unit-tests" ["phantomjs" :runner "<<cljs-artefact-path>>"]}})
+#+END_SRC
+
+** ClojureScript test harness                                      :noexport:
+#+BEGIN_SRC html :tangle {{tangle-target}}index.html :noweb yes {{tangle-mkdirp}}:padline no
+  <!DOCTYPE html5>
+  <html lang="en">
+    <head>
+      <title><<lein-coords>> test</title>
+    </head>
+    <body>
+      <script type="text/javascript" src="<<cljs-artefact-path>>"></script>
+    </body>
+  </html>
+#+END_SRC
+** Accessing library version during runtime
+
+  The autogenerated namespace ={{ns-root}}.version= contains a single
+  symbol =version= holding the version string defined above:
+
+#+BEGIN_SRC clojure :noweb yes
+  (use '[{{ns-root}}.version])
+  
+  (prn version)
+  ; "<<version>>"
+#+END_SRC
+
+#+BEGIN_SRC clojure :tangle {{tangle-target}}src/cljx/{{ns-root-path}}/version.cljx :noweb yes {{tangle-mkdirp}}:padline no :exports none
+  (ns {{ns-root}}.version)
+  (def ^:const version "<<version>>")
+#+END_SRC
+
+* Modules
+
+#+INCLUDE: "core.org" :minlevel 2

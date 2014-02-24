@@ -1,0 +1,17 @@
+#+SEQ_TODO:       TODO(t) INPROGRESS(i) WAITING(w@) | DONE(d) CANCELED(c@)
+#+TAGS:           write(w) update(u) fix(f) verify(v) noexport(n)
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+* TODO Namespace: {{ns-root}}.core
+
+  This namespace provides...
+
+** Namespace declaration
+#+BEGIN_SRC clojure :tangle {{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx :mkdirp yes :padline no
+  (ns {{ns-root}}.core)
+#+END_SRC
+
+** Helper functions
+#+BEGIN_SRC clojure :tangle {{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx
+  (defn foo [] 42)
+#+END_SRC
