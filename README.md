@@ -18,6 +18,7 @@ configures a Lein project with the currently latest versions of:
 * ClojureScript 0.0-2173
 * cljx 0.3.2
 * cljsbuild 1.0.2
+* clojurescript.test 0.2.2
 * austin 0.1.4
 * criterium 0.4.1
 
