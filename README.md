@@ -23,7 +23,7 @@ configures a Lein project with the currently latest versions of:
 
 ## Usage
 
-'''bash
+```bash
 lein new thing-babel org.foo/bar \
   author "my name" \
   email "a@b.com" \
@@ -42,13 +42,13 @@ license                 : Apache Software License 2.0
 description             : Another great project
 path for gen sources    : generated/
 project root namespace  : org.foo.bar
-'''
+```
 
 Apart from the project name all other options are optional (indeed).
 If omitted, some values will assume the following defaults:
 
 * **author** - local user name (via `(System/getProperty "user.name")`)
-* **license** - "epl" (lein's default choice)*
-* **desc** - "FIXME: ..." (project description)
-* **target** - "babel" (source for generated/tangled source blocks
+* **license** - `"epl"` (lein's default choice, currently only other choice is `asl`)
+* **desc** - `"FIXME: ..."` (project description)
+* **target** - `"babel"` (source for generated/tangled source blocks
   from .org files)
