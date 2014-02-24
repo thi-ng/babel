@@ -3,15 +3,16 @@
 A Leiningen project template for literate Clojure projects w/ Emacs &
 [org-mode](http://orgmode.org).
 
-This template does *not* create a working Lein project folder, but
-generates a number of ORG files (most importantly
+This template does *not* create a working Lein project directory per
+se, but constitutes more of a meta template consisting of a few ORG
+files (most importantly
 [index.org](https://raw.github.com/thi-ng/thing-babel/master/src/leiningen/new/thing_babel/index.org))
-which contains a parametric description of the Lein project to be
-generated (and regenerated in the future). These ORG files must be
-tangled with the generated `tangle.sh` script and will generate a
+which contain a parametric description of the Lein project to be
+generated and regenerated in the future. These ORG files must be
+tangled with the supplied `tangle.sh` script and will generate a
 working lein project from those.
 
-The template assumes a x-platform CLJX project structure and
+The template is aimed at an x-platform CLJX project structure and
 configures a Lein project with the currently latest versions of:
 
 * Clojure 1.6.0-beta1
@@ -23,6 +24,12 @@ configures a Lein project with the currently latest versions of:
 * criterium 0.4.1
 
 ## Usage
+
+The project name given can be fully qualified (as in the example
+below), however the created directory will only take the last name part
+minus the leading group ID (if any). The fully qualified name is used
+to define namespaces & target paths within the generated .org files
+and will also be inserted into the resulting `project.clj` file.
 
 ```bash
 lein new thing-babel org.foo/bar \
@@ -81,9 +88,17 @@ Success!
 Apart from the project name all other options are optional (indeed).
 If omitted, some values will assume the following defaults:
 
-* **author** - local user name (via `(System/getProperty "user.name")`)
+* **author** - local user name (via `(System/getProperty
+  "user.name")`)
 * **desc** - `"FIXME: ..."` (project description)
-* **license** - `"epl"` (lein's default choice, currently only other choice is `asl`)
-* **target** - `"babel"` (source for generated/tangled source blocks
-  from .org files)
+* **license** - `"epl"` (lein's default choice, currently only other
+  choice is `asl`)
+* **target** - `"babel"` (source folder prefix for generated/tangled
+  source blocks from .org files)
 * **url** - `"http://github.com"` (project url)
+
+## Misc
+
+I recommend using the Emacs
+[Leuven theme](https://github.com/fniessen/emacs-leuven-theme) for a
+great org-mode experience...
