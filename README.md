@@ -37,7 +37,9 @@ lein new thing-babel org.foo/bar \
 Generating fresh literate programming project: org.foo/bar
 generated project dir   : bar
 artefact group ID       : org.foo
+project url             : http://project.com
 project author          : my name
+author url              : http://home.com
 author email            : a@b.com
 license                 : Apache Software License 2.0
 description             : Another great project
