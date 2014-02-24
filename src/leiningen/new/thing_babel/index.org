@@ -87,7 +87,7 @@ target/{{name}}-<<version>>.js
 ** Building this project
 
   This project is written in a literate programming format and
-  requires [[https://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCwQFjAA&url=http%3A%2F%2Fwww.gnu.org%2Fs%2Femacs%2F&ei=3XkKU56JFOjy7Aaum4GwCw&usg=AFQjCNHZpLWr8MEYtdTPJaVmC1IVQiS02g&bvm=bv.61725948,d.ZGU][Emacs]] & [[http://orgmode.org][Org-mode]] to generate usable source code. Assuming
+  requires [[https://www.gnu.org/software/emacs/][Emacs]] & [[http://orgmode.org][Org-mode]] to generate usable source code. Assuming
   both are installed, the easiest way to generate a working project is
   via command line:
 
