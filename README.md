@@ -4,19 +4,38 @@ A Leiningen project template for literate Clojure projects w/ Emacs &
 [org-mode](http://orgmode.org).
 
 This template does *not* create a working Lein project directory per
-se, but constitutes more of a meta template consisting of a few ORG
-files (most importantly
-[index.org](https://raw.github.com/thi-ng/thing-babel/master/src/leiningen/new/thing_babel/index.org))
-which contain a parametric description of the Lein project to be
-generated and regenerated in the future. These ORG files must be
-tangled with the supplied `tangle.sh` script and will generate a
-working lein project from those.
+se, but constitutes more of a meta template consisting of a several
+`.org` files (most importantly
+[index.org](https://raw.github.com/thi-ng/babel/master/src/leiningen/new/thing_babel/index.org))
+which contains both a nice template for a library README and a
+parametric description of the Lein project to be generated and
+regenerated in the future. These `.org` files must be tangled with the
+supplied `tangle.sh` script and will generate a working lein project
+from those.
+
+## New in 0.2.0
+
+Generated `.org` files are now placed in dedicated `src` & `test`
+sub folders to provide a cleaner project structure.
+
+A `setup.org` file is created to define common & shared org-mode
+configuration for all project files.
+
+New in version 0.2.0 is also the presence of
+[libraryofbabel.org](https://raw.github.com/thi-ng/babel/master/src/leiningen/new/thing_babel/libraryofbabel.org),
+org-mode's mechanism to support re-usable & parametric code templates.
+The generated `.org` file for the main namespace demonstrates the use
+of such code templates (albeit in a very construed way). A much better
+and more realistic use for these templates is to provide skeleton
+implementations when working with Clojure protocols.
+
+## Objective
 
 The template is aimed at an x-platform CLJX project structure and
 configures a Lein project with the currently latest versions of:
 
-* Clojure 1.6.0-beta1
-* ClojureScript 0.0-2173
+* Clojure 1.6.0-RC1
+* ClojureScript 0.0-2156 (for compatibility w/ Austin)
 * cljx 0.3.2
 * cljsbuild 1.0.2
 * clojurescript.test 0.2.2
@@ -60,7 +79,7 @@ cd bar
 ./tangle.sh *.org test/*.org
 
 # switch into generated project (value of `target` key above)
-cd generated/
+cd generated
 
 # trigger cleaning, cljx processing & testing
 lein cleantest

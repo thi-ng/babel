@@ -34,7 +34,8 @@
               target "babel"
               url "https://github.com/"}} opts
         mkdirp (when-not (empty? target) ":mkdirp yes ")
-        target (when-not (empty? target) (str target java.io.File/separator))
+        tangle-target (when-not (empty? target) (str target java.io.File/separator))
+        target (if (empty? target) "project root" target)
         group (group-name name)
         opts (merge
               {:name (tpl/project-name name)
@@ -48,7 +49,8 @@
                :license-url (get-in licenses [license :url])
                :ns-root (tpl/sanitize-ns name)
                :ns-root-path (tpl/name-to-path name)
-               :tangle-target target
+               :tangle-target tangle-target
+               :target target
                :tangle-mkdirp mkdirp}
               opts)]
     (main/info (str "Generating fresh literate programming project: " name))
@@ -64,7 +66,10 @@
                 :tangle-target "path for gen sources"
                 :ns-root "project root namespace"])
     (tpl/->files opts
-                 ["index.org" (render "index.org" opts)]
-                 ["core.org" (render "core.org" opts)]
+                 ["README.md" (render "README.md" opts)]
+                 ["src/setup.org" (render "setup.org" opts)]
+                 ["src/index.org" (render "index.org" opts)]
+                 ["src/core.org" (render "core.org" opts)]
+                 ["src/libraryofbabel.org" (render "libraryofbabel.org" opts)]
                  ["test/core.org" (render "test.org" opts)]
                  ["tangle.sh" (render "tangle.sh") :executable true])))
