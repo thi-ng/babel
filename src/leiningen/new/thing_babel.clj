@@ -1,7 +1,10 @@
 (ns leiningen.new.thing-babel
-  (:require [leiningen.new.templates :as tpl]
-            [leiningen.core.main :as main]
-            [clojure.string :as str]))
+  (:require
+   [leiningen.new.templates :as tpl]
+   [leiningen.core.main :as main]
+   [clojure.string :as str])
+  (:import
+   [java.util Locale Calendar]))
 
 (def licenses
   {"asl" {:name "Apache Software License 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0"}
@@ -51,7 +54,11 @@
                :ns-root-path (tpl/name-to-path name)
                :tangle-target tangle-target
                :target target
-               :tangle-mkdirp mkdirp}
+               :tangle-mkdirp mkdirp
+               :tzone (-> (Locale/getDefault)
+                          (Calendar/getInstance)
+                          (.get Calendar/ZONE_OFFSET)
+                          (/ (* 1000 60 60)))}
               opts)]
     (main/info (str "Generating fresh literate programming project: " name))
     (opts-info opts
@@ -61,6 +68,7 @@
                 :author "project author"
                 :author-url "author url"
                 :email "author email"
+                :tzone "author timezone"
                 :license-name "license"
                 :desc "description"
                 :tangle-target "path for gen sources"

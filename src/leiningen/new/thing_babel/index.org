@@ -2,7 +2,26 @@
 #+TITLE:          {{fqname}}
 
 * About the project
+
+** TODO Overview
+
+{{desc}}
+
+** TODO Status
+** TODO Example usage
+
+#+BEGIN_SRC clojure
+  (require '{{ns-root}}.core)
+
+  ;; TODO some magic
+#+END_SRC
+
+** License
+
+This project is open source and licensed under the [[{{license-url}}][{{license-name}}]].
+
 ** Injected properties                                             :noexport:
+
 #+BEGIN_SRC clojure :exports none :noweb-ref version
 0.1.0-SNAPSHOT
 #+END_SRC
@@ -18,24 +37,6 @@ target/test-classes
 #+BEGIN_SRC clojure :exports none :noweb yes :noweb-ref cljs-artefact-path
 target/{{name}}-<<version>>.js
 #+END_SRC
-
-** TODO Overview
-
-{{desc}}
-
-** TODO Status
-
-** TODO Example usage
-
-#+BEGIN_SRC clojure
-  (require '{{ns-root}}.core)
-
-  ;; TODO some magic
-#+END_SRC
-
-** License
-
-This project is open source and licensed under the [[{{license-url}}][{{license-name}}]].
 
 ** Dependencies
 *** Runtime
@@ -79,9 +80,10 @@ This project is open source and licensed under the [[{{license-url}}][{{license-
 
 | *Version* | *Released* | *Description*      | *Lein coordinates*     | *Tagged Github URL* |
 |-----------+------------+--------------------+------------------------+---------------------|
-|     0.1.0 |            | 1st public release | =[{{fqname}} "0.1.0"]= |                     |
+|     0.1.0 | pending    | 1st public release | =[{{fqname}} "0.1.0"]= |                     |
 
 ** Leiningen coordinates
+
 #+BEGIN_SRC clojure :noweb yes :noweb-ref lein-coords
   [{{fqname}} <<version>>]
 #+END_SRC
@@ -101,12 +103,9 @@ edit its path in =tangle.sh=):
 #+END_SRC
 
 Tangling is the process of extracting & combining source blocks from
-=.org= files into an actual working project/source tree. This project
-currently consists of 26 namespaces and 6500+ lines of code, the
-tangling of which takes approx. 20 secs.
-
-Once tangling is complete, you can =cd= into the generated project
-directory (={{target}}=) and then use =lein= as usual.
+=.org= files into an actual working project/source tree. Once tangling
+is complete, you can =cd= into the generated project directory
+(={{target}}=) and then use =lein= as usual.
 
 *** Testing
 
@@ -133,6 +132,7 @@ Emacs (=C-c C-v t=) or =tangle.sh=, then reload the namespace in the
 REPL via =(require '{{ns-root}}... :reload)= or similar.
 
 ** Leiningen project file                                          :noexport:
+
 #+BEGIN_SRC clojure :tangle ../{{tangle-target}}project.clj :noweb yes {{tangle-mkdirp}}:padline no
   (defproject {{fqname}} "<<version>>"
     :description "{{desc}}"
@@ -143,7 +143,7 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
 
     :source-paths ["src/cljx"]
     :test-paths ["<<gen-test-path>>"]
-  
+
     :profiles {:dev {:dependencies [<<dep-cljs>>
                                     <<dep-criterium>>]
                      :plugins [<<dep-cljx>>
@@ -152,7 +152,7 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
                                <<dep-austin>>]
                      :hooks [cljx.hooks]
                      :aliases {"cleantest" ["do" "clean," "test," "cljsbuild" "test"]}}}
-  
+
     :cljx {:builds [{:source-paths ["src/cljx"]
                      :output-path "<<gen-source-path>>"
                      :rules :clj}
@@ -165,16 +165,22 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
                     {:source-paths ["test/cljx"]
                      :output-path "<<gen-test-path>>"
                      :rules :cljs}]}
-  
+
     :cljsbuild {:builds [{:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
                           :id "simple"
                           :compiler {:output-to "<<cljs-artefact-path>>"
                                      :optimizations :whitespace
                                      :pretty-print true}}]
-                :test-commands {"unit-tests" ["phantomjs" :runner "<<cljs-artefact-path>>"]}})
+                :test-commands {"unit-tests" ["phantomjs" :runner "<<cljs-artefact-path>>"]}}
+
+    :pom-addition [:developers [:developer
+                                [:name "{{author}}"]
+                                [:url "{{author-url}}"]
+                                [:timezone "{{tzone}}"]]])
 #+END_SRC
 
 ** ClojureScript HTML harness                                      :noexport:
+
 #+BEGIN_SRC html :tangle ../{{tangle-target}}index.html :noweb yes {{tangle-mkdirp}}:padline no
   <!DOCTYPE html5>
   <html lang="en">
