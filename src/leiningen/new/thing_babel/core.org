@@ -14,12 +14,6 @@ only needs to be done once (or whenever you've updated a template in
 that file). The supplied =tangle.sh= script automatically includes
 this file, so this step isn't necessary.
 
-** Namespace declaration
-
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx :mkdirp yes :padline no
-  (ns {{ns-root}}.core)
-#+END_SRC
-
 ** TODO Helper functions
 
 The following code blocks demonstrate how to use code template (with &
@@ -27,7 +21,7 @@ without arguments) defined in [[file:libraryofbabel.org][libraryofbabel.org]]. A
 such code blocks have the =:noweb yes= header flag in order for the
 templates to be resolved.
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx :noweb yes
+#+BEGIN_SRC clojure :noweb-ref helpers
   <<lob-{{name}}-greetings(msg="hello world")>>
 
   (println
@@ -37,6 +31,16 @@ templates to be resolved.
 
 ** TODO Public functions
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx
-  
+#+BEGIN_SRC clojure :noweb-ref main
+  ;; TODO main code...  
+#+END_SRC
+
+** Complete namespace definition
+
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx :noweb yes :mkdirp yes :padline no
+  (ns {{ns-root}}.core)
+
+  <<helpers>>
+
+  <<main>>
 #+END_SRC

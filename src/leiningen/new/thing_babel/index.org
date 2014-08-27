@@ -42,11 +42,11 @@ target/{{name}}-<<version>>.js
 *** Runtime
 **** [[https://github.com/clojure/clojure][Clojure]]
 #+BEGIN_SRC clojure :noweb-ref dep-clj
-[org.clojure/clojure "1.6.0-RC1"]
+[org.clojure/clojure "1.6.0"]
 #+END_SRC
 **** [[https://github.com/clojure/clojurescript][ClojureScript]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljs
-[org.clojure/clojurescript "0.0-2156"]
+[org.clojure/clojurescript "0.0-2322"]
 #+END_SRC
 *** Development
 **** [[https://github.com/cemerick/austin][Austin]]
@@ -55,19 +55,19 @@ target/{{name}}-<<version>>.js
 #+END_SRC
 **** [[https://github.com/lynaghk/cljx][Cljx]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljx
-[com.keminglabs/cljx "0.3.2"]
+[com.keminglabs/cljx "0.4.0"]
 #+END_SRC
 **** [[https://github.com/hugoduncan/criterium][Criterium]]
 #+BEGIN_SRC clojure :noweb-ref dep-criterium
-[criterium "0.4.1"]
+[criterium "0.4.3"]
 #+END_SRC
 **** [[https://github.com/cemerick/clojurescript.test][clojurescript.test]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljs-test
-[com.cemerick/clojurescript.test "0.2.2"]
+[com.cemerick/clojurescript.test "0.3.1"]
 #+END_SRC
 **** [[https://github.com/emezeske/lein-cljsbuild][Cljsbuild]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljsbuild
-[lein-cljsbuild "1.0.2"]
+[lein-cljsbuild "1.0.3"]
 #+END_SRC
 
 ** Contributors
@@ -140,10 +140,10 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
     :license {:name "{{license-name}}"
               :url "{{license-url}}"}
     :dependencies [<<dep-clj>>]
-
+  
     :source-paths ["src/cljx"]
     :test-paths ["<<gen-test-path>>"]
-
+  
     :profiles {:dev {:dependencies [<<dep-cljs>>
                                     <<dep-criterium>>]
                      :plugins [<<dep-cljx>>
@@ -152,7 +152,7 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
                                <<dep-austin>>]
                      :hooks [cljx.hooks]
                      :aliases {"cleantest" ["do" "clean," "test," "cljsbuild" "test"]}}}
-
+  
     :cljx {:builds [{:source-paths ["src/cljx"]
                      :output-path "<<gen-source-path>>"
                      :rules :clj}
@@ -165,14 +165,19 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
                     {:source-paths ["test/cljx"]
                      :output-path "<<gen-test-path>>"
                      :rules :cljs}]}
-
+  
     :cljsbuild {:builds [{:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
-                          :id "simple"
+                          :id "dev"
                           :compiler {:output-to "<<cljs-artefact-path>>"
                                      :optimizations :whitespace
-                                     :pretty-print true}}]
+                                     :pretty-print true}}
+                         {:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
+                          :id "prod"
+                          :compiler {:output-to "<<cljs-artefact-path>>"
+                                     :optimizations :advanced
+                                     :pretty-print false}}]
                 :test-commands {"unit-tests" ["phantomjs" :runner "<<cljs-artefact-path>>"]}}
-
+  
     :pom-addition [:developers [:developer
                                 [:name "{{author}}"]
                                 [:url "{{author-url}}"]
