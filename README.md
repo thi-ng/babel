@@ -34,13 +34,13 @@ implementations when working with Clojure protocols.
 The template is aimed at an x-platform CLJX project structure and
 configures a Lein project with the currently latest versions of:
 
-* Clojure 1.6.0-RC1
-* ClojureScript 0.0-2156 (for compatibility w/ Austin)
-* cljx 0.3.2
-* cljsbuild 1.0.2
-* clojurescript.test 0.2.2
+* Clojure 1.6.0
+* ClojureScript 0.0-2322 (for compatibility w/ Austin)
+* cljx 0.4.0
+* cljsbuild 1.0.3
+* clojurescript.test 0.3.1
 * austin 0.1.4
-* criterium 0.4.1
+* criterium 0.4.3
 
 ## Usage
 
