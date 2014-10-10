@@ -55,7 +55,7 @@ target/{{name}}-<<version>>.js
 #+END_SRC
 **** [[https://github.com/lynaghk/cljx][Cljx]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljx
-[com.keminglabs/cljx "0.4.0"]
+[org.clojars.cemerick/cljx "0.5.0-SNAPSHOT"]
 #+END_SRC
 **** [[https://github.com/hugoduncan/criterium][Criterium]]
 #+BEGIN_SRC clojure :noweb-ref dep-criterium
@@ -135,49 +135,58 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
 
 #+BEGIN_SRC clojure :tangle ../{{tangle-target}}project.clj :noweb yes {{tangle-mkdirp}}:padline no
   (defproject {{fqname}} "<<version>>"
-    :description "{{desc}}"
-    :url "<<project-url>>"
-    :license {:name "{{license-name}}"
-              :url "{{license-url}}"}
+    :description  "{{desc}}"
+    :url          "<<project-url>>"
+    :license      {:name "{{license-name}}"
+                   :url "{{license-url}}"
+                   :distribution :repo}
+    :scm          {:name "git"
+                   :url "https://github.com/"}
+
+    :min-lein-vesion "2.4.0"
+
     :dependencies [<<dep-clj>>]
-  
+
     :source-paths ["src/cljx"]
-    :test-paths ["<<gen-test-path>>"]
-  
-    :profiles {:dev {:dependencies [<<dep-cljs>>
-                                    <<dep-criterium>>]
-                     :plugins [<<dep-cljx>>
-                               <<dep-cljsbuild>>
-                               <<dep-cljs-test>>
-                               <<dep-austin>>]
-                     :hooks [cljx.hooks]
-                     :aliases {"cleantest" ["do" "clean," "test," "cljsbuild" "test"]}}}
-  
-    :cljx {:builds [{:source-paths ["src/cljx"]
-                     :output-path "<<gen-source-path>>"
-                     :rules :clj}
-                    {:source-paths ["src/cljx"]
-                     :output-path "<<gen-source-path>>"
-                     :rules :cljs}
-                    {:source-paths ["test/cljx"]
-                     :output-path "<<gen-test-path>>"
-                     :rules :clj}
-                    {:source-paths ["test/cljx"]
-                     :output-path "<<gen-test-path>>"
-                     :rules :cljs}]}
-  
-    :cljsbuild {:builds [{:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
-                          :id "dev"
-                          :compiler {:output-to "<<cljs-artefact-path>>"
-                                     :optimizations :whitespace
-                                     :pretty-print true}}
-                         {:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
-                          :id "prod"
-                          :compiler {:output-to "<<cljs-artefact-path>>"
-                                     :optimizations :advanced
-                                     :pretty-print false}}]
-                :test-commands {"unit-tests" ["phantomjs" :runner "<<cljs-artefact-path>>"]}}
-  
+    :test-paths   ["<<gen-test-path>>"]
+
+    :profiles     {:dev {:dependencies [<<dep-cljs>>
+                                        <<dep-criterium>>]
+                         :plugins [<<dep-cljx>>
+                                   <<dep-cljsbuild>>
+                                   <<dep-cljs-test>>
+                                   <<dep-austin>>]
+                         :global-vars {*warn-on-reflection* true}
+                         :jvm-opts ^:replace []
+                         :auto-clean false
+                         :prep-tasks [["cljx" "once"] "javac" "compile"]
+                         :aliases {"cleantest" ["do" "clean" ["test" ":all"] ["cljsbuild" "test"]]}}}
+
+    :cljx         {:builds [{:source-paths ["src/cljx"]
+                             :output-path "<<gen-source-path>>"
+                             :rules :clj}
+                            {:source-paths ["src/cljx"]
+                             :output-path "<<gen-source-path>>"
+                             :rules :cljs}
+                            {:source-paths ["test/cljx"]
+                             :output-path "<<gen-test-path>>"
+                             :rules :clj}
+                            {:source-paths ["test/cljx"]
+                             :output-path "<<gen-test-path>>"
+                             :rules :cljs}]}
+
+    :cljsbuild    {:builds [{:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
+                             :id "dev"
+                             :compiler {:output-to "<<cljs-artefact-path>>"
+                                        :optimizations :whitespace
+                                        :pretty-print true}}
+                            {:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
+                             :id "prod"
+                             :compiler {:output-to "<<cljs-artefact-path>>"
+                                        :optimizations :advanced
+                                        :pretty-print false}}]
+                   :test-commands {"unit-tests" ["phantomjs" :runner "<<cljs-artefact-path>>"]}}
+
     :pom-addition [:developers [:developer
                                 [:name "{{author}}"]
                                 [:url "{{author-url}}"]
@@ -214,7 +223,7 @@ symbol =version= holding the version string defined above:
 #+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/version.cljx :noweb yes {{tangle-mkdirp}}:padline no :exports none
   (ns {{ns-root}}.version)
 
-  (def ^:const version "<<version>>")
+  (def version "<<version>>")
 #+END_SRC
 
 * Modules
