@@ -1,27 +1,29 @@
-#+SETUPFILE: "../src/setup.org"
+#+SETUPFILE: ../src/setup.org
 
 * {{ns-root}}.test.core
 
-** Namespace declaration
-
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx :mkdirp yes :padline no
-  (ns {{ns-root}}.test.core
-    (:require
-     ,#+clj  [clojure.test :refer :all]
-     ,#+cljs [cemerick.cljs.test :as t])
-    ,#+cljs
-    (:require-macros
-     [cemerick.cljs.test :refer (is deftest with-test testing)]))
-#+END_SRC
 ** TODO Test constants
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx
+#+BEGIN_SRC clojure :noweb-ref const
   (def meaning 42)
 #+END_SRC
 
 ** TODO Main tests
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx
+#+BEGIN_SRC clojure :noweb-ref tests
   (deftest epic-fail
     (is (= 3 (+ 1 1)) "FIXME"))
+#+END_SRC
+
+** Namespace declaration
+
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx :noweb yes :mkdirp yes :padline no
+  (ns {{ns-root}}.test.core
+    (:require
+     ,#+clj  [clojure.test :refer :all]
+     ,#+cljs [cemerick.cljs.test :refer-macros [is deftest with-test testing]]))
+
+  <<const>>
+
+  <<tests>>
 #+END_SRC

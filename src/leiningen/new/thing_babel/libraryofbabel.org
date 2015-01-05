@@ -8,6 +8,7 @@ simple Elisp form, but you can also define verbatim templates if vars
 aren't needed...
 
 ** Example template with variables
+
 #+NAME: lob-{{name}}-greetings
 #+BEGIN_SRC emacs-lisp :var msg=""
   (replace-regexp-in-string
@@ -17,6 +18,7 @@ aren't needed...
 #+END_SRC
 
 ** Example verbatim template
+
 #+NAME: lob-{{name}}-verbatim
 #+BEGIN_SRC clojure
   (* 12345679 7.2)

@@ -8,7 +8,8 @@
 
 (def licenses
   {"asl" {:name "Apache Software License 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0"}
-   "epl" {:name "Eclipse Public License" :url "http://www.eclipse.org/legal/epl-v10.html"}})
+   "epl" {:name "Eclipse Public License" :url "http://www.eclipse.org/legal/epl-v10.html"}
+   "mit" {:name "MIT License" :url "http://opensource.org/licenses/MIT"}})
 
 (def render (tpl/renderer "thing-babel"))
 
@@ -32,34 +33,35 @@
                   (map #(vector (keyword (first %)) (second %)))
                   (into {}))
         {:keys [author license target url]
-         :or {author (System/getProperty "user.name")
-              license "epl"
-              target "babel"
-              url "https://github.com/"}} opts
-        mkdirp (when-not (empty? target) ":mkdirp yes ")
+         :or   {author (System/getProperty "user.name")
+                license "epl"
+                target "babel"
+                url "https://github.com/"}} opts
+        mkdirp        (when-not (empty? target) ":mkdirp yes ")
         tangle-target (when-not (empty? target) (str target java.io.File/separator))
-        target (if (empty? target) "project root" target)
-        group (group-name name)
-        opts (merge
-              {:name (tpl/project-name name)
-               :group group
-               :fqname name
-               :sanitized (tpl/name-to-path name)
-               :author author
-               :url url
-               :desc "FIXME: write description"
-               :license-name (get-in licenses [license :name])
-               :license-url (get-in licenses [license :url])
-               :ns-root (tpl/sanitize-ns name)
-               :ns-root-path (tpl/name-to-path name)
-               :tangle-target tangle-target
-               :target target
-               :tangle-mkdirp mkdirp
-               :tzone (-> (Locale/getDefault)
-                          (Calendar/getInstance)
-                          (.get Calendar/ZONE_OFFSET)
-                          (/ (* 1000 60 60)))}
-              opts)]
+        target        (if (empty? target) "project root" target)
+        group         (group-name name)
+        license       (.toLowerCase license)
+        opts          (merge
+                       {:name (tpl/project-name name)
+                        :group group
+                        :fqname name
+                        :sanitized (tpl/name-to-path name)
+                        :author author
+                        :url url
+                        :desc "FIXME: write description"
+                        :license-name (get-in licenses [license :name])
+                        :license-url (get-in licenses [license :url])
+                        :ns-root (tpl/sanitize-ns name)
+                        :ns-root-path (tpl/name-to-path name)
+                        :tangle-target tangle-target
+                        :target target
+                        :tangle-mkdirp mkdirp
+                        :tzone (-> (Locale/getDefault)
+                                   (Calendar/getInstance)
+                                   (.get Calendar/ZONE_OFFSET)
+                                   (/ (* 1000 60 60)))}
+                       opts)]
     (main/info (str "Generating fresh literate programming project: " name))
     (opts-info opts
                [:name "generated project dir"

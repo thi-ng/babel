@@ -13,13 +13,19 @@ regenerated in the future. These `.org` files must be tangled with the
 supplied `tangle.sh` script and will generate a working lein project
 from those.
 
-## New in 0.2.0
+## 0.2.3
 
-Generated `.org` files are now placed in dedicated `src` & `test`
-sub folders to provide a cleaner project structure.
+* Update included dependencies (see below)
+* Add support for MIT license
+* Change internal project ORG-links to be GitHub friendly
+* Minor cleanups of template files
 
-A `setup.org` file is created to define common & shared org-mode
-configuration for all project files.
+## 0.2.0
+
+* Generated `.org` files are now placed in dedicated `src` & `test`
+  sub folders to provide a cleaner project structure.
+* A `setup.org` file is created to define common & shared org-mode
+  configuration for all project files.
 
 New in version 0.2.0 is also the presence of
 [libraryofbabel.org](https://raw.github.com/thi-ng/babel/master/src/leiningen/new/thing_babel/libraryofbabel.org),
@@ -35,11 +41,10 @@ The template is aimed at an x-platform CLJX project structure and
 configures a Lein project with the currently latest versions of:
 
 * Clojure 1.6.0
-* ClojureScript 0.0-2322 (for compatibility w/ Austin)
-* cljx 0.4.0
-* cljsbuild 1.0.3
-* clojurescript.test 0.3.1
-* austin 0.1.4
+* ClojureScript 0.0-2665
+* cljx 0.5.0
+* cljsbuild 1.0.4
+* clojurescript.test 0.3.3
 * criterium 0.4.3
 
 ## Usage
@@ -56,8 +61,8 @@ lein new thing-babel org.foo/bar \
   email "a@b.com" \
   url "http://project.com" \
   author-url "http://home.com" \
-  license "asl" \
-  target "generated" \
+  license ASL \
+  target generated \
   desc "Another great project"
 
 Generating fresh literate programming project: org.foo/bar
@@ -73,10 +78,10 @@ path for gen sources    : generated/
 project root namespace  : org.foo.bar
 
 # switch into newly created project folder
-cd bar 
+cd bar
 
 # (re)generate actual lein project & sources
-./tangle.sh *.org test/*.org
+./tangle.sh src/*.org test/*.org
 
 # switch into generated project (value of `target` key above)
 cd generated
@@ -110,11 +115,11 @@ If omitted, some values will assume the following defaults:
 * **author** - local user name (via `(System/getProperty
   "user.name")`)
 * **desc** - `"FIXME: ..."` (project description)
-* **license** - `"epl"` (lein's default choice, currently only other
-  choice is `asl`)
-* **target** - `"babel"` (source folder prefix for generated/tangled
+* **license** - `EPL` (lein's default choice, currently only other
+  choices are `ASL` or `MIT`)
+* **target** - `babel` (source folder prefix for generated/tangled
   source blocks from .org files)
-* **url** - `"http://github.com"` (project url)
+* **url** - `"http://github.com"` (project url, must be quoted)
 
 ## Misc
 

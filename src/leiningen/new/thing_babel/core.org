@@ -1,4 +1,4 @@
-#+SETUPFILE: "setup.org"
+#+SETUPFILE: setup.org
 
 * TODO Namespace: {{ns-root}}.core
 
@@ -12,12 +12,12 @@ you'll first need to notify Org-mode about the presence of these
 templates via =C-c C-v i= and then choose =libraryofbabel.org=. This
 only needs to be done once (or whenever you've updated a template in
 that file). The supplied =tangle.sh= script automatically includes
-this file, so this step isn't necessary.
+this file, so this step isn't necessary from the command line.
 
 ** TODO Helper functions
 
-The following code blocks demonstrate how to use code template (with &
-without arguments) defined in [[file:libraryofbabel.org][libraryofbabel.org]]. Always make sure
+The following code blocks demonstrate how to use code templates (with
+and without arguments) defined in [[file:libraryofbabel.org][libraryofbabel.org]]. Always make sure
 such code blocks have the =:noweb yes= header flag in order for the
 templates to be resolved.
 
