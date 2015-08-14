@@ -74,7 +74,7 @@
                 :tangle-target "path for gen sources"
                 :ns-root       "project root namespace"])
     (tpl/->files opts
-                 ["readme.org"             (render "readme.org" opts)]
+                 ["README.org"             (render "readme.org" opts)]
                  ["src/setup.org"          (render "setup.org" opts)]
                  ["src/core.org"           (render "core.org" opts)]
                  ["src/libraryofbabel.org" (render "libraryofbabel.org" opts)]

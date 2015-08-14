@@ -1,7 +1,7 @@
 #+SETUPFILE: setup.org
 #+TITLE: {{fqname}}
 
-TODO brief description
+{{desc}}
 
 * Contents                                                         :toc_3_gh:
  - [[#about-the-project][About the project]]
