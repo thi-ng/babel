@@ -1,5 +1,12 @@
 #+SETUPFILE: setup.org
 
+* Contents                                                         :toc_3_gh:
+ - [[#todo-namespace-ns-rootcore][TODO Namespace: {{ns-root}}.core]]
+         - [[#note-for-authors--contributors][Note for authors / contributors]]
+     - [[#todo-public-functions][TODO Public functions]]
+     - [[#todo-helper-functions][TODO Helper functions]]
+     - [[#complete-namespace-definition][Complete namespace definition]]
+
 * TODO Namespace: {{ns-root}}.core
 
 This namespace provides...
@@ -9,10 +16,17 @@ This namespace provides...
 If this namespace utilizes code templates defined in
 [[file:libraryofbabel.org][libraryofbabel.org]], and you want to tangle it directly from Emacs,
 you'll first need to notify Org-mode about the presence of these
-templates via =C-c C-v i= and then choose =libraryofbabel.org=. This
-only needs to be done once (or whenever you've updated a template in
-that file). The supplied =tangle.sh= script automatically includes
-this file, so this step isn't necessary from the command line.
+templates via =C-c C-v i= and then choose =libraryofbabel.org= from
+this directory. This only needs to be done once per emacs session (or
+whenever you've updated a template in that file). The supplied
+=tangle.sh= script automatically includes this file, so this step
+isn't necessary from the command line.
+
+** TODO Public functions
+
+#+BEGIN_SRC clojure :noweb-ref main
+  ;; TODO main code...
+#+END_SRC
 
 ** TODO Helper functions
 
@@ -29,15 +43,9 @@ templates to be resolved.
    <<lob-{{name}}-verbatim>>)
 #+END_SRC
 
-** TODO Public functions
-
-#+BEGIN_SRC clojure :noweb-ref main
-  ;; TODO main code...  
-#+END_SRC
-
 ** Complete namespace definition
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/core.cljx :noweb yes :mkdirp yes :padline no
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/{{ns-root-path}}/core.cljc :noweb yes :mkdirp yes :padline no
   (ns {{ns-root}}.core)
 
   <<helpers>>

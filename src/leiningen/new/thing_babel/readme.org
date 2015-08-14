@@ -1,6 +1,32 @@
 #+SETUPFILE: setup.org
 #+TITLE: {{fqname}}
 
+TODO brief description
+
+* Contents                                                         :toc_3_gh:
+ - [[#about-the-project][About the project]]
+     - [[#todo-overview][TODO Overview]]
+     - [[#todo-status][TODO Status]]
+     - [[#todo-example-usage][TODO Example usage]]
+ - [[#namespaces][Namespaces]]
+ - [[#tests][Tests]]
+ - [[#project-definition][Project definition]]
+     - [[#injected-properties][Injected properties]]
+     - [[#dependencies][Dependencies]]
+         - [[#runtime][Runtime]]
+         - [[#development][Development]]
+     - [[#leiningen-coordinates][Leiningen coordinates]]
+     - [[#building-this-project][Building this project]]
+         - [[#testing][Testing]]
+         - [[#working-with-the-repl][Working with the REPL]]
+     - [[#leiningen-project-file][Leiningen project file]]
+     - [[#clojurescript-html-harness][ClojureScript HTML harness]]
+     - [[#accessing-library-version-during-runtime][Accessing library version during runtime]]
+         - [[#version-namespace][Version namespace]]
+     - [[#release-history][Release history]]
+     - [[#contributors][Contributors]]
+     - [[#license][License]]
+
 * About the project
 
 ** TODO Overview
@@ -8,6 +34,8 @@
 {{desc}}
 
 ** TODO Status
+
+ALPHA quality, in active development.
 
 ** TODO Example usage
 
@@ -17,9 +45,15 @@
   ;; TODO some magic
 #+END_SRC
 
-** License
+* Namespaces
 
-This project is open source and licensed under the [[{{license-url}}][{{license-name}}]].
+- [[./src/core.org][{{ns-root}}.core]]
+
+* Tests
+
+- [[./test/core.org][{{ns-root}}.test.core]]
+
+* Project definition
 
 ** Injected properties                                             :noexport:
 
@@ -29,14 +63,6 @@ This project is open source and licensed under the [[{{license-url}}][{{license-
 
 #+BEGIN_SRC clojure :exports none :noweb-ref project-url
 {{url}}
-#+END_SRC
-
-#+BEGIN_SRC clojure :exports none :noweb-ref gen-source-path
-target/classes
-#+END_SRC
-
-#+BEGIN_SRC clojure :exports none :noweb-ref gen-test-path
-target/test-classes
 #+END_SRC
 
 #+BEGIN_SRC clojure :exports none :noweb yes :noweb-ref cljs-artefact-path
@@ -49,20 +75,15 @@ target/{{name}}-<<version>>.js
 
 **** [[https://github.com/clojure/clojure][Clojure]]
 #+BEGIN_SRC clojure :noweb-ref dep-clj
-[org.clojure/clojure "1.6.0"]
+[org.clojure/clojure "1.7.0"]
 #+END_SRC
 
 **** [[https://github.com/clojure/clojurescript][ClojureScript]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljs
-[org.clojure/clojurescript "0.0-2665"]
+[org.clojure/clojurescript "1.7.48"]
 #+END_SRC
 
 *** Development
-
-**** [[https://github.com/lynaghk/cljx][Cljx]]
-#+BEGIN_SRC clojure :noweb-ref dep-cljx
-[com.keminglabs/cljx "0.5.0"]
-#+END_SRC
 
 **** [[https://github.com/hugoduncan/criterium][Criterium]]
 #+BEGIN_SRC clojure :noweb-ref dep-criterium
@@ -76,20 +97,8 @@ target/{{name}}-<<version>>.js
 
 **** [[https://github.com/emezeske/lein-cljsbuild][Cljsbuild]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljsbuild
-[lein-cljsbuild "1.0.4"]
+[lein-cljsbuild "1.0.6"]
 #+END_SRC
-
-** Contributors
-
-| *Name*     | *Role*                          | *Website*      |
-|------------+---------------------------------+----------------|
-| [[{{email}}][{{author}}]] | initiator & principal developer | {{author-url}} |
-
-** Release history
-
-| *Version* | *Released* | *Description*      | *Lein coordinates*     | *Tagged Github URL* |
-|-----------+------------+--------------------+------------------------+---------------------|
-|     0.1.0 | pending    | 1st public release | =[{{fqname}} "0.1.0"]= |                     |
 
 ** Leiningen coordinates
 
@@ -100,10 +109,10 @@ target/{{name}}-<<version>>.js
 ** Building this project
 
 This project is written in a literate programming format and requires
-[[https://www.gnu.org/software/emacs/][Emacs]] & [[http://orgmode.org][Org-mode]] to generate usable source code in [[https://github.com/lynaghk/cljx][CLJX]] form. Assuming
-both tools are installed, the easiest way to generate a working
-project is via command line (make sure =emacs= is on your path or else
-edit its path in =tangle.sh=):
+[[https://www.gnu.org/software/emacs/][Emacs]] & [[http://orgmode.org][Org-mode]] to generate usable source code. Assuming both tools
+are installed, the easiest way to generate a working project is via
+command line (make sure =emacs= is on your path or else edit its path
+in =tangle.sh=):
 
 #+BEGIN_SRC bash
   git clone https://github.com/{{group}}/{{name}}.git
@@ -133,16 +142,15 @@ further experimentation in the browser.
 
 *** Working with the REPL
 
-Since the generated =project.clj= (see below) includes REPL hooks for
-CLJX, editing files in Org-mode, then re-loading & testing changes is
-quite trivial. Simply launch a REPL (via =lein= or Emacs) as usual.
-Everytime you've made changes to an =.org= file, re-tangle it from
-Emacs (=C-c C-v t=) or =tangle.sh=, then reload the namespace in the
-REPL via =(require '{{ns-root}}... :reload)= or similar.
+Editing code blocks or files in Org-mode, then re-loading & testing
+changes is quite trivial. Simply launch a REPL (via =lein= or Emacs)
+as usual. Everytime you've made changes to an =.org= file, re-tangle
+it from Emacs (=C-c C-v t=) or =tangle.sh=, then reload the namespace
+in the REPL via =(require '{{ns-root}}... :reload)= or similar.
 
 ** Leiningen project file                                          :noexport:
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}project.clj :noweb yes {{tangle-mkdirp}}:padline no
+#+BEGIN_SRC clojure :tangle {{tangle-target}}project.clj :noweb yes :mkdirp yes :padline no
   (defproject {{fqname}} "<<version>>"
     :description  "{{desc}}"
     :url          "<<project-url>>"
@@ -154,41 +162,22 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
 
     :min-lein-vesion "2.4.0"
 
-    :dependencies [<<dep-clj>>]
+    :dependencies [<<dep-clj>>
+                   <<dep-cljs>>]
 
-    :source-paths ["src/cljx"]
-    :test-paths   ["<<gen-test-path>>"]
-
-    :profiles     {:dev {:dependencies [<<dep-cljs>>
-                                        <<dep-criterium>>]
-                         :plugins [<<dep-cljx>>
-                                   <<dep-cljsbuild>>
+    :profiles     {:dev {:dependencies [<<dep-criterium>>]
+                         :plugins [<<dep-cljsbuild>>
                                    <<dep-cljs-test>>]
                          :global-vars {*warn-on-reflection* true}
                          :jvm-opts ^:replace []
-                         :auto-clean false
-                         :prep-tasks [["cljx" "once"]]
-                         :aliases {"cleantest" ["do" "clean," "cljx" "once," "test," "cljsbuild" "test"]}}}
+                         :aliases {"cleantest" ["do" "clean," "test," "cljsbuild" "test"]}}}
 
-    :cljx         {:builds [{:source-paths ["src/cljx"]
-                             :output-path "<<gen-source-path>>"
-                             :rules :clj}
-                            {:source-paths ["src/cljx"]
-                             :output-path "<<gen-source-path>>"
-                             :rules :cljs}
-                            {:source-paths ["test/cljx"]
-                             :output-path "<<gen-test-path>>"
-                             :rules :clj}
-                            {:source-paths ["test/cljx"]
-                             :output-path "<<gen-test-path>>"
-                             :rules :cljs}]}
-
-    :cljsbuild    {:builds [{:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
+    :cljsbuild    {:builds [{:source-paths ["src" "test"]
                              :id "dev"
                              :compiler {:output-to "<<cljs-artefact-path>>"
                                         :optimizations :whitespace
                                         :pretty-print true}}
-                            {:source-paths ["<<gen-source-path>>" "<<gen-test-path>>"]
+                            {:source-paths ["src"]
                              :id "prod"
                              :compiler {:output-to "<<cljs-artefact-path>>"
                                         :optimizations :advanced
@@ -203,7 +192,7 @@ REPL via =(require '{{ns-root}}... :reload)= or similar.
 
 ** ClojureScript HTML harness                                      :noexport:
 
-#+BEGIN_SRC html :tangle ../{{tangle-target}}index.html :noweb yes {{tangle-mkdirp}}:padline no
+#+BEGIN_SRC html :tangle {{tangle-target}}index.html :noweb yes :mkdirp yes :padline no
   <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -230,19 +219,26 @@ symbol =version= holding the version string defined above:
 
 *** Version namespace                                              :noexport:
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/cljx/{{ns-root-path}}/version.cljx :noweb yes {{tangle-mkdirp}}:padline no :exports none
+#+BEGIN_SRC clojure :tangle {{tangle-target}}src/{{ns-root-path}}/version.cljc :noweb yes :mkdirp yes :padline no :exports none
   (ns {{ns-root}}.version)
 
   (def version "<<version>>")
 #+END_SRC
 
-* Modules
+** Release history
 
-** Core API
+| *Version* | *Released* | *Description*      | *Lein coordinates*     | *Tagged Github URL* |
+|-----------+------------+--------------------+------------------------+---------------------|
+|     0.1.0 | pending    | 1st public release | =[{{fqname}} "0.1.0"]= |                     |
 
-- [[core.org][{{ns-root}}.core]]
+** Contributors
 
-* Tests
+| *Name*     | *Role*                          | *Website*      |
+|------------+---------------------------------+----------------|
+| [[{{email}}][{{author}}]] | initiator & principal developer | {{author-url}} |
 
-- [[../test/core.org][{{ns-root}}.test.core]]
+** License
 
+Copyright © 2015 {{author}}
+
+This project is open source and licensed under the [[{{license-url}}][{{license-name}}]].

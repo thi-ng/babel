@@ -37,7 +37,6 @@
                 license "epl"
                 target "babel"
                 url "https://github.com/"}} opts
-        mkdirp        (when-not (empty? target) ":mkdirp yes ")
         tangle-target (when-not (empty? target) (str target java.io.File/separator))
         target        (if (empty? target) "project root" target)
         group         (group-name name)
@@ -56,7 +55,6 @@
                         :ns-root-path (tpl/name-to-path name)
                         :tangle-target tangle-target
                         :target target
-                        :tangle-mkdirp mkdirp
                         :tzone (-> (Locale/getDefault)
                                    (Calendar/getInstance)
                                    (.get Calendar/ZONE_OFFSET)
@@ -64,22 +62,22 @@
                        opts)]
     (main/info (str "Generating fresh literate programming project: " name))
     (opts-info opts
-               [:name "generated project dir"
-                :group "artefact group ID"
-                :url "project url"
-                :author "project author"
-                :author-url "author url"
-                :email "author email"
-                :tzone "author timezone"
-                :license-name "license"
-                :desc "description"
+               [:name          "generated project dir"
+                :group         "artefact group ID"
+                :url           "project url"
+                :author        "project author"
+                :author-url    "author url"
+                :email         "author email"
+                :tzone         "author timezone"
+                :license-name  "license"
+                :desc          "description"
                 :tangle-target "path for gen sources"
-                :ns-root "project root namespace"])
+                :ns-root       "project root namespace"])
     (tpl/->files opts
-                 ["README.md" (render "README.md" opts)]
-                 ["src/setup.org" (render "setup.org" opts)]
-                 ["src/index.org" (render "index.org" opts)]
-                 ["src/core.org" (render "core.org" opts)]
+                 ["readme.org"             (render "readme.org" opts)]
+                 ["src/setup.org"          (render "setup.org" opts)]
+                 ["src/core.org"           (render "core.org" opts)]
                  ["src/libraryofbabel.org" (render "libraryofbabel.org" opts)]
-                 ["test/core.org" (render "test.org" opts)]
-                 ["tangle.sh" (render "tangle.sh") :executable true])))
+                 ["test/core.org"          (render "test.org" opts)]
+                 ["tangle.sh"              (render "tangle.sh") :executable true]
+                 ["tangle-all.sh"          (render "tangle-all.sh") :executable true])))

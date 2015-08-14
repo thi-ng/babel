@@ -1,7 +1,7 @@
 # thing-babel
 
-A Leiningen project template for literate Clojure projects w/ Emacs &
-[org-mode](http://orgmode.org).
+A Leiningen project template for literate Clojure & Clojurescript
+projects w/ Emacs & [org-mode](http://orgmode.org).
 
 This template does *not* create a working Lein project directory per
 se, but constitutes more of a meta template consisting of a several
@@ -11,7 +11,16 @@ which contains both a nice template for a library README and a
 parametric description of the Lein project to be generated and
 regenerated in the future. These `.org` files must be tangled with the
 supplied `tangle.sh` script and will generate a working lein project
-from those.
+directory from those.
+
+## 0.3.0 - 2015-08-14
+
+* Update dependencies to latest stable versions
+* Remove CLJX, add reader conditionals
+* Restructure project layout (move `src/index.org` => `readme.org` in main dir)
+* Restructure `readme.org` internal structure
+* Add TOC headings (requires [org-toc package](https://github.com/snosov1/org-toc)
+* Add `tangle-all.sh` bash script
 
 ## 0.2.3
 
@@ -40,10 +49,9 @@ implementations when working with Clojure protocols.
 The template is aimed at an x-platform CLJX project structure and
 configures a Lein project with the currently latest versions of:
 
-* Clojure 1.6.0
-* ClojureScript 0.0-2665
-* cljx 0.5.0
-* cljsbuild 1.0.4
+* Clojure 1.7.0
+* ClojureScript 1.7.48
+* cljsbuild 1.0.6
 * clojurescript.test 0.3.3
 * criterium 0.4.3
 
@@ -81,21 +89,13 @@ project root namespace  : org.foo.bar
 cd bar
 
 # (re)generate actual lein project & sources
-./tangle.sh src/*.org test/*.org
+./tangle-all.sh 
 
 # switch into generated project (value of `target` key above)
 cd generated
 
 # trigger cleaning, cljx processing & testing
-lein cleantest
-Rewriting src/cljx to target/classes (clj) with features #{clj} and 0 transformations.
-Rewriting src/cljx to target/classes (cljs) with features #{cljs} and 1 transformations.
-Rewriting test/cljx to target/test-classes (clj) with features #{clj} and 0 transformations.
-Rewriting test/cljx to target/test-classes (cljs) with features #{cljs} and 1 transformations.
-
 lein test org.foo.bar.test.core
-
-lein test :only org.foo.bar.test.core/epic-fail
 
 FAIL in (epic-fail) (core.clj:12)
 FIXME

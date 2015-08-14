@@ -17,11 +17,11 @@
 
 ** Namespace declaration
 
-#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/cljx/{{ns-root-path}}/test/core.cljx :noweb yes :mkdirp yes :padline no
+#+BEGIN_SRC clojure :tangle ../{{tangle-target}}test/{{ns-root-path}}/test/core.cljc :noweb yes :mkdirp yes :padline no
   (ns {{ns-root}}.test.core
     (:require
-     ,#+clj  [clojure.test :refer :all]
-     ,#+cljs [cemerick.cljs.test :refer-macros [is deftest with-test testing]]))
+     #?(:clj  [clojure.test :refer :all]
+        :cljs [cemerick.cljs.test :refer-macros [is deftest with-test testing]])))
 
   <<const>>
 
