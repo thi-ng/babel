@@ -4,10 +4,10 @@ A Leiningen project template for literate Clojure & Clojurescript
 projects w/ Emacs & [org-mode](http://orgmode.org).
 
 This template does *not* create a working Lein project directory per
-se, but constitutes more of a meta template consisting of a several
-`.org` files (most importantly
-[index.org](https://raw.github.com/thi-ng/babel/master/src/leiningen/new/thing_babel/index.org))
-which contains both a nice template for a library README and a
+se, but constitutes more of a meta Lein template consisting of a
+several `.org` files (most importantly
+[readme.org](./src/leiningen/new/thing_babel/readme.org)) which
+contains both a structured template for a library README and a
 parametric description of the Lein project to be generated and
 regenerated in the future. These `.org` files must be tangled with the
 supplied `tangle.sh` script and will generate a working lein project
@@ -41,12 +41,13 @@ directory from those.
   configuration for all project files.
 
 New in version 0.2.0 is also the presence of
-[libraryofbabel.org](https://raw.github.com/thi-ng/babel/master/src/leiningen/new/thing_babel/libraryofbabel.org),
+[libraryofbabel.org](./src/leiningen/new/thing_babel/libraryofbabel.org),
 org-mode's mechanism to support re-usable & parametric code templates.
 The generated `.org` file for the main namespace demonstrates the use
 of such code templates (albeit in a very construed way). A much better
 and more realistic use for these templates is to provide skeleton
-implementations when working with Clojure protocols.
+implementations when working with Clojure protocols. See
+[thi.ng/geom](http://thi.ng/geom) for a concrete example.
 
 ## Objective
 
