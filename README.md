@@ -13,6 +13,10 @@ regenerated in the future. These `.org` files must be tangled with the
 supplied `tangle.sh` script and will generate a working lein project
 directory from those.
 
+## 0.3.1 - 2015-08-28
+
+* Update dependencies
+
 ## 0.3.0 - 2015-08-14
 
 * Update dependencies to latest stable versions
