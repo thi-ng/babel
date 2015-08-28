@@ -80,7 +80,7 @@ target/{{name}}-<<version>>.js
 
 **** [[https://github.com/clojure/clojurescript][ClojureScript]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljs
-[org.clojure/clojurescript "1.7.48"]
+[org.clojure/clojurescript "1.7.107"]
 #+END_SRC
 
 *** Development
@@ -97,7 +97,7 @@ target/{{name}}-<<version>>.js
 
 **** [[https://github.com/emezeske/lein-cljsbuild][Cljsbuild]]
 #+BEGIN_SRC clojure :noweb-ref dep-cljsbuild
-[lein-cljsbuild "1.0.6"]
+[lein-cljsbuild "1.1.0"]
 #+END_SRC
 
 ** Leiningen coordinates
