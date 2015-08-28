@@ -54,8 +54,8 @@ The template is aimed at an x-platform CLJX project structure and
 configures a Lein project with the currently latest versions of:
 
 * Clojure 1.7.0
-* ClojureScript 1.7.48
-* cljsbuild 1.0.6
+* ClojureScript 1.7.107
+* cljsbuild 1.1.0
 * clojurescript.test 0.3.3
 * criterium 0.4.3
 
