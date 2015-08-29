@@ -37,7 +37,8 @@
                 license "epl"
                 target "babel"
                 url "https://github.com/"}} opts
-        tangle-target (when-not (empty? target) (str target java.io.File/separator))
+        tangle-target (when (and (seq target) (not= \/ (last target)))
+                        (str target \/))
         target        (if (empty? target) "project root" target)
         group         (group-name name)
         license       (.toLowerCase license)

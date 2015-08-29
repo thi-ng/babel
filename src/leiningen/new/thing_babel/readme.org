@@ -1,4 +1,4 @@
-#+SETUPFILE: setup.org
+#+SETUPFILE: src/setup.org
 #+TITLE: {{fqname}}
 
 {{desc}}
