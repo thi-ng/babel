@@ -37,8 +37,9 @@
                 license "epl"
                 target "babel"
                 url "https://github.com/"}} opts
-        tangle-target (when (and (seq target) (not= \/ (last target)))
-                        (str target \/))
+        tangle-target (if (and (seq target) (not= \/ (last target)))
+                        (str target \/)
+                        target)
         target        (if (empty? target) "project root" target)
         group         (group-name name)
         license       (.toLowerCase license)
