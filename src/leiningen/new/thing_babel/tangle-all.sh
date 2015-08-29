@@ -1,2 +1,2 @@
 #!/bin/sh
-./tangle.sh readme.org src/*.org test/*.org
+./tangle.sh README.org src/*.org test/*.org
