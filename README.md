@@ -13,6 +13,10 @@ regenerated in the future. These `.org` files must be tangled with the
 supplied `tangle.sh` script and will generate a working lein project
 directory from those.
 
+## 0.3.2.2 - 2015-08-30
+
+* Bugfix readme tpl filename case issue (#2)
+
 ## 0.3.2 - 2015-08-29
 
 * Bugfix generated file paths (see #2, #3)
