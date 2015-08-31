@@ -7,6 +7,13 @@ parts of this project. Templates using variables are wrapped in a
 simple Elisp form, but you can also define verbatim templates if vars
 aren't needed...
 
+** Project namespace prefix
+
+#+NAME: project-ns-prefix
+#+BEGIN_SRC clojure
+{{ns-root}}
+#+END_SRC
+
 ** Example template with variables
 
 #+NAME: lob-{{name}}-greetings

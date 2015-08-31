@@ -46,7 +46,7 @@ templates to be resolved.
 ** Complete namespace definition
 
 #+BEGIN_SRC clojure :tangle ../{{tangle-target}}src/{{ns-root-path}}/core.cljc :noweb yes :mkdirp yes :padline no
-  (ns {{ns-root}}.core)
+  (ns <<project-ns-prefix>>.core)
 
   <<helpers>>
 

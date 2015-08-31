@@ -139,3 +139,7 @@ If omitted, some values will assume the following defaults:
 I recommend using the Emacs
 [Leuven theme](https://github.com/fniessen/emacs-leuven-theme) for a
 great org-mode experience...
+
+In order to automatically update the TOC of each org file, I too
+recommend installing the
+[org-toc package](https://github.com/snosov1/org-toc) Emacs package.
