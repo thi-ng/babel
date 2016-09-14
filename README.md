@@ -142,4 +142,4 @@ great org-mode experience...
 
 In order to automatically update the TOC of each org file, I too
 recommend installing the
-[org-toc package](https://github.com/snosov1/org-toc) Emacs package.
+[toc-org package](https://github.com/snosov1/toc-org) Emacs package.
